@@ -1,0 +1,3 @@
+C:/Users/ytari/CLionProjects/untitled12/cmake-build-debug/CMakeFiles/untitled12.dir
+C:/Users/ytari/CLionProjects/untitled12/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ytari/CLionProjects/untitled12/cmake-build-debug/CMakeFiles/rebuild_cache.dir
