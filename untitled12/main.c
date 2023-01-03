@@ -4,18 +4,23 @@
 #define STACK_SIZE 10
 #define QUEUE_SIZE 50
 
+//Binary Search Tree Structure
+
 struct tree {
     struct tree *left;
     struct tree *right;
     int data;
 };
+typedef struct tree *btree;
+
+//Priority Queue Structure
 
 typedef struct priorityQueue {
     int A[QUEUE_SIZE + 1];
     int cnt;
 } pqueue;
 
-typedef struct tree *btree;
+//Linked List Structure
 
 typedef struct node {
     int data;
@@ -23,15 +28,21 @@ typedef struct node {
     struct node *prev;
 } Node;
 
+//Stack Structure
+
 typedef struct {
     int cnt;
     Node *top;
 } stack;
 
+//Array Implemented Stack Structure
+
 typedef struct {
     int top;
     int data[STACK_SIZE];
 } arrayStack;
+
+//Queue Structure
 
 typedef struct {
     int cnt;
@@ -39,26 +50,29 @@ typedef struct {
     struct node *rear;
 } queue;
 
-void Initialize(queue *q) {
+//Basic Queue Functions
+
+void Initialize(queue *q) {                                                                     //Initializing the queue
     q->cnt = 0;
     q->front = q->rear = NULL;
 }
 
-int isFull(queue *q) {
+int isFull(queue *q) {                                                    //to check queue whether queue is full or not?
     if (q->cnt == QUEUE_SIZE)
         return 1;
     else
         return 0;
 }
 
-int isEmpty(queue *q) {
+int isEmpty(queue *q) {                                                  //to check queue whether queue is empty or not?
     if (q->cnt == 0)
         return 1;
     else
         return 0;
 }
 
-void Enqueue(queue *q, int x) {
+void
+Enqueue(queue *q, int x) {                                                      //to add a new element into the queue
     if (isFull(q))
         printf("Queue is full!!");
     else {
@@ -75,7 +89,7 @@ void Enqueue(queue *q, int x) {
     }
 }
 
-int Dequeue(queue *q) {
+int Dequeue(queue *q) {                                                            //to remove an element from the queue
     if (isEmpty(q)) {
         printf("Queue is empty!!");
         return -1;
@@ -89,20 +103,9 @@ int Dequeue(queue *q) {
     }
 }
 
-void EnqueueArray(queue *q, int x) {
-    if (isFull(q)) {
-        printf("Queue is full!!");
-    } else {
-        q->rear++;
-        q->cnt++;
+//Basic Linked List Functions
 
-        if (q->rear == QUEUE_SIZE)
-            q->rear = 0;
-
-    }
-}
-
-Node *AddFront(Node *head, int x) {
+Node *AddFront(Node *head, int x) {                                          //to add a new element to front of the list
     Node *temp = (Node *) malloc(sizeof(Node));
     temp->data = x;
     temp->next = head;
@@ -111,7 +114,7 @@ Node *AddFront(Node *head, int x) {
     return head;
 }
 
-struct node *AddLast(Node *head, int x) {
+struct node *AddLast(Node *head, int x) {                                      //to add a new element to end of the list
 
     struct node *temp = (struct node *) malloc(sizeof(struct node));
 
@@ -132,7 +135,7 @@ struct node *AddLast(Node *head, int x) {
     return head;
 }
 
-Node *DeleteNode(Node *head, int x) {
+Node *DeleteNode(Node *head, int x) {                                                       //to remove a node from list
     Node *temp;
 
     if (head == NULL) {
@@ -163,7 +166,7 @@ Node *DeleteNode(Node *head, int x) {
     return head;
 }
 
-void PrintList(Node *head) {
+void PrintList(Node *head) {                                                     //to print the all elements of the list
 
     if (head == NULL)
         printf("List is empty...\n");
@@ -177,7 +180,7 @@ void PrintList(Node *head) {
     printf("\n");
 }
 
-void CountNodesOfList(Node *head) {
+void CountNodesOfList(Node *head) {                                            //to count how many nodes are in the list
     if (head == NULL) {
         printf("Number of nodes is = 0\n");
     } else {
@@ -191,7 +194,7 @@ void CountNodesOfList(Node *head) {
     }
 }
 
-int CountRecursive(Node *head) {
+int CountRecursive(Node *head) {                             //to count how many node are in the list in a recursive way
     if (head == NULL)
         return 0;
     else {
@@ -199,7 +202,7 @@ int CountRecursive(Node *head) {
     }
 }
 
-Node *DestroySingleLinkedList(Node *head) {
+Node *DestroySingleLinkedList(Node *head) {                                                      //to destroy whole list
     Node *temp = head;
 
     while (head != NULL) {
@@ -210,7 +213,7 @@ Node *DestroySingleLinkedList(Node *head) {
     return head;
 }
 
-Node *DestroySingleLinkedListRecursive(Node *head) {
+Node *DestroySingleLinkedListRecursive(Node *head) {                          //to destroy whole list in a recursive way
     Node *temp = head;
 
     if (head == NULL)
@@ -223,7 +226,7 @@ Node *DestroySingleLinkedListRecursive(Node *head) {
     return head;
 }
 
-Node *AddFrontForDLL(Node *head, int x) {
+Node *AddFrontForDLL(Node *head, int x) {                      //to add a new element to front of the double linked list
     struct node *temp = (Node *) malloc(sizeof(Node));
 
     temp->data = x;
@@ -238,7 +241,7 @@ Node *AddFrontForDLL(Node *head, int x) {
     return head;
 }
 
-Node *AddLastOfDLL(Node *head, int x) {
+Node *AddLastOfDLL(Node *head, int x) {                         //to add a new element to end of the double linked list
     struct node *temp = (Node *) malloc(sizeof(Node));
 
     temp->data = x;
@@ -258,7 +261,7 @@ Node *AddLastOfDLL(Node *head, int x) {
     return head;
 }
 
-Node *DeleteNodeOfDLL(Node *head, int x) {
+Node *DeleteNodeOfDLL(Node *head, int x) {                                //to remove an element from double linked list
     Node *temp;
 
     if (head == NULL) {
@@ -290,7 +293,7 @@ Node *DeleteNodeOfDLL(Node *head, int x) {
     }
 }
 
-int CheckExistingOfValue(Node *head, int value) {
+int CheckExistingOfValue(Node *head, int value) {                           //to check if target value exist in the list
 
     Node *temp = head;
 
@@ -306,7 +309,7 @@ int CheckExistingOfValue(Node *head, int value) {
     return 0;
 }
 
-Node *AddFrontForCLL(Node *head, int x) {
+Node *AddFrontForCLL(Node *head, int x) {                    //to add a new element to front of the circular linked list
     Node *temp = (Node *) malloc(sizeof(Node));
 
     temp->data = x;
@@ -326,7 +329,7 @@ Node *AddFrontForCLL(Node *head, int x) {
     return head;
 }
 
-Node *AddLastForCLL(Node *head, int x) {
+Node *AddLastForCLL(Node *head, int x) {                       //to add a new element to end of the circular linked list
     Node *temp = (Node *) malloc(sizeof(Node));
 
     temp->data = x;
@@ -347,7 +350,7 @@ Node *AddLastForCLL(Node *head, int x) {
     return head;
 }
 
-void PrintCLL(Node *head) {
+void PrintCLL(Node *head) {                                              //to print all elements of circular linked list
     Node *temp = head;
 
 
@@ -360,6 +363,8 @@ void PrintCLL(Node *head) {
         }
     }
 }
+
+//Basic Stack Functions
 
 void InitializeStack(stack *stk) {
     stk->cnt = 0;
@@ -859,6 +864,7 @@ int PrintAncestorsOfNode(btree root, int num) {
         return 0;
 
 }
+
 
 int InDegree(int a[][3], int v) {
     int i, degree = 0;

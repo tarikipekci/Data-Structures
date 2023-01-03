@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/Users/ytari/CLionProjects/untitled12/cmake-build-debug/
+cmake_ninja_workdir = C$:/Users/ytari/CLionProjects/Data-Structures/untitled12/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target untitled12
 
@@ -49,7 +49,7 @@ cmake_ninja_workdir = C$:/Users/ytari/CLionProjects/untitled12/cmake-build-debug
 
 build cmake_object_order_depends_target_untitled12: phony || CMakeFiles/untitled12.dir
 
-build CMakeFiles/untitled12.dir/main.c.obj: C_COMPILER__untitled12_Debug C$:/Users/ytari/CLionProjects/untitled12/main.c || cmake_object_order_depends_target_untitled12
+build CMakeFiles/untitled12.dir/main.c.obj: C_COMPILER__untitled12_Debug C$:/Users/ytari/CLionProjects/Data-Structures/untitled12/main.c || cmake_object_order_depends_target_untitled12
   DEP_FILE = CMakeFiles\untitled12.dir\main.c.obj.d
   FLAGS = -g -std=gnu11
   OBJECT_DIR = CMakeFiles\untitled12.dir
@@ -81,7 +81,7 @@ build untitled12.exe: C_EXECUTABLE_LINKER__untitled12_Debug CMakeFiles/untitled1
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\ytari\CLionProjects\untitled12\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\ytari\CLionProjects\Data-Structures\untitled12\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -92,7 +92,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\ytari\CLionProjects\untitled12\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\ytari\CLionProjects\untitled12 -BC:\Users\ytari\CLionProjects\untitled12\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\ytari\CLionProjects\Data-Structures\untitled12\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\ytari\CLionProjects\Data-Structures\untitled12 -BC:\Users\ytari\CLionProjects\Data-Structures\untitled12\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -110,7 +110,7 @@ build untitled12: phony untitled12.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/ytari/CLionProjects/untitled12/cmake-build-debug
+# Folder: C:/Users/ytari/CLionProjects/Data-Structures/untitled12/cmake-build-debug
 
 build all: phony untitled12.exe
 
