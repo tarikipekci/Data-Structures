@@ -846,6 +846,18 @@ btree PrintParentsOfSelectedNode(btree root, int target) {
     return root;
 }
 
+void AddMax(btree root, int max) {
+    if (root == NULL)
+        return;
+
+    else
+        root->data += max;
+
+    AddMax(root->left, max);
+    AddMax(root->right, max);
+
+}
+
 
 int PrintAncestorsOfNode(btree root, int num) {
 
@@ -865,6 +877,17 @@ int PrintAncestorsOfNode(btree root, int num) {
 
 }
 
+int FindMax(btree root) {
+    if (root == NULL)
+        return 0;
+
+
+    while (root->right != NULL)
+        root = root->right;
+
+
+    return root->data;
+}
 
 int InDegree(int a[][3], int v) {
     int i, degree = 0;
@@ -893,28 +916,38 @@ int Degree(int v, int n, int a[v][n]) {
     return degree;
 }
 
-int FindMax(btree root) {
-    if (root == NULL)
-        return 0;
+int degree(int A[][6], int v, int n) {
+    int result = 0;
+    for (int i = 0; i < 6; ++i) {
+        result += A[v][i];
+    }
+    return result;
 
-
-    while (root->right != NULL)
-        root = root->right;
-
-
-    return root->data;
 }
 
-void AddMax(btree root, int max) {
-    if (root == NULL)
-        return;
+int edges(int A[][6]) {
+    int i, j, result = 0;
 
-    else
-        root->data += max;
+    for (i = 0; i < 6; ++i) {
+        for (j = i + 1; j < 6; ++j) {
+            result += A[i][j];
+        }
+    }
+    return result;
+}
 
-    AddMax(root->left, max);
-    AddMax(root->right, max);
+void PrintGraph(Node *heads[]) {
 
+    for (int i = 0; i < 6; ++i) {
+
+        Node *temp = heads[i];
+
+        while (temp != NULL) {
+            printf("%d\t", temp->data);
+            temp = temp->next;
+        }
+        printf("\n");
+    }
 }
 
 int main() {
@@ -924,18 +957,54 @@ int main() {
     pqueue pq1;
     InitializePq(&pq1);
 
-    root1 = Insert(root1, 20);
-    root1 = Insert(root1, 10);
-    root1 = Insert(root1, 15);
-    root1 = Insert(root1, 25);
-    root1 = Insert(root1, 4);
-    root1 = Insert(root1, 30);
-    root1 = Insert(root1, 11);
+    Node *heads[6] = {NULL};
 
+    heads[0] = AddLast(heads[0], 3);
+    heads[0] = AddLast(heads[0], 1);
+    heads[1] = AddLast(heads[1], 2);
+    heads[1] = AddLast(heads[1], 6);
+    heads[2] = AddLast(heads[2], 1);
+    heads[2] = AddLast(heads[2], 4);
+    heads[3] = AddLast(heads[3], 4);
+    heads[4] = AddLast(heads[4], 5);
+    heads[4] = AddLast(heads[4], 3);
+    heads[4] = AddLast(heads[4], 2);
+    heads[5] = AddLast(heads[5], 4);
+    heads[5] = AddLast(heads[5], 6);
 
-    AddMax(root1, FindMax(root1));
-    InOrder(root1);
-
+    PrintGraph(heads);
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+/*int N = 6;
+
+int A[6][6] = {{0, 1, 0, 0, 1, 0},
+               {1, 0, 1, 1, 0, 0},
+               {0, 1, 0, 1, 1, 1},
+               {0, 1, 1, 0, 1, 0},
+               {1, 0, 1, 1, 0, 1},
+               {0, 0, 1, 0, 1, 0}};
+
+int degree_sum = 0;
+
+for (int i = 0; i < N; ++i) {
+
+    degree_sum += degree(A, i, N);
+    printf("\n The degree of vertex is %d = %d", i + 1, degree(A, i, N));
+    printf("\n The sum of degrees is = %d", degree_sum);
+
+}
+
+printf("\n The number of edges is = %d", edges(A));*/
+
