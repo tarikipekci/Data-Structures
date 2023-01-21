@@ -858,7 +858,6 @@ void AddMax(btree root, int max) {
 
 }
 
-
 int PrintAncestorsOfNode(btree root, int num) {
 
     if (root == NULL)
@@ -874,7 +873,6 @@ int PrintAncestorsOfNode(btree root, int num) {
         return 1;
     } else
         return 0;
-
 }
 
 int FindMax(btree root) {
@@ -950,14 +948,86 @@ void PrintGraph(Node *heads[]) {
     }
 }
 
+void FindTheSelectedNodeOfTheTree(btree root, int target) {
+    if (root == NULL)
+        return;
+
+    else {
+        if (root->data == target) {
+            printf("Selected target is found!\n");
+        } else if (root->data < target) {
+            FindTheSelectedNodeOfTheTree(root->right, target);
+        } else if (root->data > target) {
+            FindTheSelectedNodeOfTheTree(root->left, target);
+        } else {
+            printf("Selected target is not found in this tree!");
+        }
+    }
+}
+
+int isSame(btree root1, btree root2) {
+    if (root1 == NULL && root2 == NULL)
+        return 1;
+    else if (root1 != NULL && root2 != NULL)
+        return (root1->data == root2->data && isSame(root1->left, root2->left) && isSame(root1->right, root2->right));
+    else
+        return 0;
+}
+
+void FindRootIsHalfOfItsRightChild(btree root) {
+    if (root == NULL)
+        return;
+
+    if (root->right != NULL) {
+        if (root->data * 2 == root->right->data)
+            printf("%d\n", root->data);
+    }
+
+    FindRootIsHalfOfItsRightChild(root->right);
+    FindRootIsHalfOfItsRightChild(root->left);
+}
+
+int FindValuesFromCertainLevelInBST(btree root, int depth) {
+    if (root == NULL)
+        return 0;
+
+    if (depth == 0)
+        return root->data;
+
+    return FindValuesFromCertainLevelInBST(root->left, depth - 1) +
+           FindValuesFromCertainLevelInBST(root->right, depth - 1);
+}
+
+int FindTheOutDegreeOfListGraph(Node *head[], int u) {
+    int degree = 0;
+
+    while (head[u] != NULL) {
+        degree++;
+        head[u] = head[u]->next;
+    }
+    return degree;
+}
+
+int IsThereAnEdge(Node *heads[], int u, int v) {
+    while (heads[u]->next != NULL) {
+        if (heads[u]->next->data == v)
+            return 1;
+
+        else {
+            u++;
+        }
+    }
+    return 0;
+}
+
 int main() {
     Node *head = NULL;
     stack n;
     btree root1 = NULL, root2 = NULL;
     pqueue pq1;
     InitializePq(&pq1);
-
     Node *heads[6] = {NULL};
+
 
     heads[0] = AddLast(heads[0], 3);
     heads[0] = AddLast(heads[0], 1);
@@ -972,9 +1042,11 @@ int main() {
     heads[5] = AddLast(heads[5], 4);
     heads[5] = AddLast(heads[5], 6);
 
-    PrintGraph(heads);
+
 
     return 0;
+
+
 }
 
 
@@ -1006,5 +1078,13 @@ for (int i = 0; i < N; ++i) {
 
 }
 
-printf("\n The number of edges is = %d", edges(A));*/
+printf("\n The number of edges is = %d", edges(A));
+
+
+
+
+    PrintGraph(heads);
+
+
+ */
 
