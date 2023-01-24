@@ -494,7 +494,7 @@ int FindParentNodes(btree root) {
         (root->left != NULL && root->right != NULL)) {
         return 1;
     }
-
+    return 0;
 }
 
 int FindBiggestNumber(btree root) {
@@ -512,6 +512,7 @@ int FindBiggestNumberRecursive(btree root) {
         return 0;
 
     if (root->right != NULL) {
+        printf("%d\n",root->data);
         FindBiggestNumberRecursive(root->right);
         root = root->right;
     }
@@ -624,9 +625,8 @@ int FindNodesWithOnlyLeftChild(btree root) {
         return 0;
     if (root->left != NULL && root->right == NULL)
         return 1;
-    FindNodesWithOnlyLeftChild(root->left);
-    FindNodesWithOnlyLeftChild(root->right);
-    return FindNodesWithOnlyLeftChild(root->left) + FindNodesWithOnlyLeftChild(root->right);
+
+    return 1 + FindNodesWithOnlyLeftChild(root->left) + FindNodesWithOnlyLeftChild(root->right);
 }
 
 int FindValueOfCertainLevel(btree root, int level) {
@@ -1028,20 +1028,12 @@ int main() {
     InitializePq(&pq1);
     Node *heads[6] = {NULL};
 
+    root1 = Insert(root1,5);
+    root1 = Insert(root1,4);
+    root1 = Insert(root1,3);
 
-    heads[0] = AddLast(heads[0], 3);
-    heads[0] = AddLast(heads[0], 1);
-    heads[1] = AddLast(heads[1], 2);
-    heads[1] = AddLast(heads[1], 6);
-    heads[2] = AddLast(heads[2], 1);
-    heads[2] = AddLast(heads[2], 4);
-    heads[3] = AddLast(heads[3], 4);
-    heads[4] = AddLast(heads[4], 5);
-    heads[4] = AddLast(heads[4], 3);
-    heads[4] = AddLast(heads[4], 2);
-    heads[5] = AddLast(heads[5], 4);
-    heads[5] = AddLast(heads[5], 6);
 
+    printf("%d", FindNodesWithOnlyLeftChild(root1));
 
 
     return 0;
@@ -1081,6 +1073,18 @@ for (int i = 0; i < N; ++i) {
 printf("\n The number of edges is = %d", edges(A));
 
 
+heads[0] = AddLast(heads[0], 3);
+    heads[0] = AddLast(heads[0], 1);
+    heads[1] = AddLast(heads[1], 2);
+    heads[1] = AddLast(heads[1], 6);
+    heads[2] = AddLast(heads[2], 1);
+    heads[2] = AddLast(heads[2], 4);
+    heads[3] = AddLast(heads[3], 4);
+    heads[4] = AddLast(heads[4], 5);
+    heads[4] = AddLast(heads[4], 3);
+    heads[4] = AddLast(heads[4], 2);
+    heads[5] = AddLast(heads[5], 4);
+    heads[5] = AddLast(heads[5], 6);
 
 
     PrintGraph(heads);
