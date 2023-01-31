@@ -512,7 +512,7 @@ int FindBiggestNumberRecursive(btree root) {
         return 0;
 
     if (root->right != NULL) {
-        printf("%d\n",root->data);
+        printf("%d\n", root->data);
         FindBiggestNumberRecursive(root->right);
         root = root->right;
     }
@@ -772,65 +772,6 @@ int SumOfNodes(btree root) {
         return root->data + SumOfNodes(root->left) + SumOfNodes(root->right);
 }
 
-void InitializePq(pqueue *p) {
-    p->cnt = 0;
-}
-
-void InsertPq(pqueue *p, int key) {
-    if (p->cnt == QUEUE_SIZE)
-        printf("Queue is full!");
-    else {
-        p->cnt++;
-        p->A[p->cnt] = key;
-        int iter = p->cnt;
-
-        while (iter != 1 && p->A[iter] < p->A[iter / 2]) {
-            int temp = p->A[iter];
-            p->A[iter] = p->A[iter / 2];
-            p->A[iter / 2] = temp;
-            iter = iter / 2;
-        }
-    }
-}
-
-void PrintHeapQueue(pqueue *p) {
-    if (p->cnt == 0)
-        printf("Queue is empty");
-    else {
-        int i;
-        for (i = 1; i <= p->cnt; i++)
-            printf("%5d", p->A[i]);
-    }
-}
-
-void Swap(int *parent, int *child) {
-    int temp = *child;;
-    *child = *parent;
-    *parent = temp;
-}
-
-int DeletePq(pqueue *p) {
-    if (p->cnt == 0) {
-        printf("Queue is empty");
-        return -100;
-    } else {
-        p->A[1] = p->A[p->cnt];
-        p->cnt--;
-        int iter = 1;
-
-        while (2 * iter <= p->cnt && (p->A[iter] > p->A[2 * iter] || p->A[iter] > p->A[2 * iter + 1])) {
-            if (p->A[2 * iter] < p->A[2 * iter + 1]) {
-                Swap(&p->A[iter], &p->A[2 * iter]);
-                iter = 2 * iter;
-            } else {
-                Swap(&p->A[iter], &p->A[2 * iter + 1]);
-                iter = 2 * iter + 1;
-            }
-        }
-    }
-    return 0;
-}
-
 btree PrintParentsOfSelectedNode(btree root, int target) {
 
     if (root == NULL) {
@@ -1020,6 +961,88 @@ int IsThereAnEdge(Node *heads[], int u, int v) {
     return 0;
 }
 
+void InitializePq(pqueue *p) {
+    p->cnt = 0;
+}
+
+void InsertPq(pqueue *p, int key) {
+    if (p->cnt == QUEUE_SIZE)
+        printf("Queue is full!");
+    else {
+        p->cnt++;
+        p->A[p->cnt] = key;
+        int iter = p->cnt;
+
+        while (iter != 1 && p->A[iter] < p->A[iter / 2]) {
+            int temp = p->A[iter];
+            p->A[iter] = p->A[iter / 2];
+            p->A[iter / 2] = temp;
+            iter = iter / 2;
+        }
+    }
+}
+
+void PrintHeapQueue(pqueue *p) {
+    if (p->cnt == 0)
+        printf("Queue is empty");
+    else {
+        int i;
+        for (i = 1; i <= p->cnt; i++)
+            printf("%5d", p->A[i]);
+    }
+}
+
+void Swap(int *parent, int *child) {
+    int temp = *child;;
+    *child = *parent;
+    *parent = temp;
+}
+
+int DeletePq(pqueue *p) {
+    if (p->cnt == 0) {
+        printf("Queue is empty");
+        return -100;
+    } else {
+        p->A[1] = p->A[p->cnt];
+        p->cnt--;
+        int iter = 1;
+
+        while (2 * iter <= p->cnt && (p->A[iter] > p->A[2 * iter] || p->A[iter] > p->A[2 * iter + 1])) {
+            if (p->A[2 * iter] < p->A[2 * iter + 1]) {
+                Swap(&p->A[iter], &p->A[2 * iter]);
+                iter = 2 * iter;
+            } else {
+                Swap(&p->A[iter], &p->A[2 * iter + 1]);
+                iter = 2 * iter + 1;
+            }
+        }
+    }
+    return 0;
+}
+
+pqueue *convert(pqueue *p) {
+    int iter = 1;
+
+    while (p->A[iter] < p->A[2 * iter]) {
+        if (p->A[2 * iter] < p->A[2 * iter + 1])
+        {
+            int a = p->A[2*iter+1];
+            p->A[2*iter + 1] = p->A[iter];
+            p->A[iter] = a;
+        }
+        else
+        {
+            int a = p->A[2*iter];
+            p->A[2*iter] = p->A[iter];
+            p->A[iter] = a;
+        }
+        if (!iter + 1 > p->cnt) {
+            iter++;
+        }
+    }
+    return p;
+}
+
 int main() {
     Node *head = NULL;
     stack n;
@@ -1028,12 +1051,30 @@ int main() {
     InitializePq(&pq1);
     Node *heads[6] = {NULL};
 
+    /*root1 = Insert(root1,25);
+    root1 = Insert(root1,7);
+    root1 = Insert(root1,55);
     root1 = Insert(root1,5);
-    root1 = Insert(root1,4);
-    root1 = Insert(root1,3);
+    root1 = Insert(root1,10);
+    root1 = Insert(root1,50);
+    root1 = Insert(root1,62);
+    root1 = Insert(root1,20);
 
+    PostOrder(root1);*/
 
-    printf("%d", FindNodesWithOnlyLeftChild(root1));
+    InsertPq(&pq1, 50);
+    InsertPq(&pq1, 15);
+    InsertPq(&pq1, 87);
+    InsertPq(&pq1, 47);
+    InsertPq(&pq1, 77);
+    InsertPq(&pq1, 35);
+
+    PrintHeapQueue(&pq1);
+
+    convert(&pq1);
+    printf("\n");
+
+    PrintHeapQueue(&pq1);
 
 
     return 0;
